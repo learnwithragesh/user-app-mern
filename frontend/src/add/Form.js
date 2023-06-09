@@ -6,18 +6,24 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { CircularProgress } from '@mui/material';
+import Alert from '@mui/material/Alert';
 
-export default function FormDialog({ open, load, handleAdd, handleClose }) {
+import { validateMail, validateName } from '../utils/Validations';
+
+export default function FormDialog({ open, load, handleAdd, handleClose, error }) {
 
     const [firstName, setFirstName] = React.useState('');
     const [lastName, setLastName] = React.useState('');
     const [email, setEmail] = React.useState('');
 
     const handleChange = (set) => (e) => {
-        set(e.target.value);
+        set(e.target.value.trim());
     }
 
     const add = () => {
+        if (!validateMail(email) || !validateName(firstName) || !validateName(lastName)) {
+            return;
+        }
         handleAdd({
             firstName,
             lastName,
@@ -38,6 +44,7 @@ export default function FormDialog({ open, load, handleAdd, handleClose }) {
                         type="email"
                         fullWidth
                         variant="standard"
+                        error={!validateMail(email)}
                         onChange={handleChange(setEmail)} />
                     <TextField
                         autoFocus
@@ -47,6 +54,7 @@ export default function FormDialog({ open, load, handleAdd, handleClose }) {
                         type="text"
                         fullWidth
                         variant="standard"
+                        error={!validateName(firstName)}
                         onChange={handleChange(setFirstName)} />
                     <TextField
                         autoFocus
@@ -56,7 +64,10 @@ export default function FormDialog({ open, load, handleAdd, handleClose }) {
                         type="text"
                         fullWidth
                         variant="standard"
+                        error={!validateName(lastName)}
                         onChange={handleChange(setLastName)} />
+                    {!load && error.message &&
+                        <Alert severity="error">{error.message}</Alert>}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
