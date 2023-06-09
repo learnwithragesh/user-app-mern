@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import { useDispatch } from 'react-redux';
 
-import Dialog from './dialog';
+import Form from './Form';
 import Network from '../utils/Network';
 import Urls from '../utils/URL';
 import { add } from '../utils/redux/reducer/user';
@@ -44,11 +44,12 @@ export default function Add() {
                 onClick={handleClickOpen}>
                 Add User
             </Button>
-            <Dialog
+            <Form
                 load={load}
                 open={open}
                 handleAdd={handleAdd}
-                handleClose={handleClose}/>
+                handleClose={handleClose}
+                error={error}/>
         </div>
     );
 
