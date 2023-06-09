@@ -1,7 +1,7 @@
 const urls = {
     users: {
-        getAll: '/users',
-        add: '/users/add'
+        getAll: '/api/users',
+        add: '/api/users/add'
     }
 }
 
