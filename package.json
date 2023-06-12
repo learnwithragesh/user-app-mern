@@ -7,7 +7,8 @@
     "start:prod": "npm run server",
     "server": "node bin/www",
     "server:dev": "nodemon bin/www --ignore frontend/ --ignore config/ --ignore routes/api/attachments/ --ignore routes/api/gcpCredential",
-    "client": "npm start --prefix frontend"
+    "client": "npm start --prefix frontend",
+    "test": "jest --detectOpenHandles"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -20,7 +21,19 @@
     "morgan": "~1.9.1"
   },
   "devDependencies": {
+    "@babel/plugin-syntax-jsx": "^7.22.5",
+    "@babel/preset-react": "^7.22.5",
+    "jest": "^29.5.0",
+    "supertest": "^6.3.3",
     "concurrently": "^8.0.1",
     "nodemon": "^2.0.22"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.js?$": "babel-jest"
+    },
+    "testPathIgnorePatterns": [
+      "/frontend/"
+    ]
   }
 }
