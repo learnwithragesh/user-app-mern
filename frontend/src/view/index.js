@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 
 import UserRow from './UserRow';
 import Network from '../utils/Network';
-import Urls from '../utils/URL';
+import Urls, { ROOT } from '../utils/URL';
 import { getUser } from '../utils/redux/reducer/user';
 
 import '../styles/view.css';
@@ -25,7 +25,7 @@ export default function BasicTable() {
 
     React.useEffect(() => {
         setLoad(true);
-        Network.GET(Urls.users.getAll, (data) => {
+        Network.GET(`${ROOT}${Urls.users.getAll}`, (data) => {
             setUsers(data.data);
         }, (err) => {
             setError(err);

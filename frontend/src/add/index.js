@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import Form from './Form';
 import Network from '../utils/Network';
-import Urls from '../utils/URL';
+import Urls, { ROOT } from '../utils/URL';
 import { add } from '../utils/redux/reducer/user';
 
 import '../styles/add.css';
@@ -26,7 +26,7 @@ export default function Add() {
 
     const handleAdd = (user) => {
         setLoad(true);
-        Network.POST(Urls.users.add, user, (data) => {
+        Network.POST(`${ROOT}${Urls.users.add}`, user, (data) => {
             dispatch(add(user));
             setOpen(false);
         }, (err) => {

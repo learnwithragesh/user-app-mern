@@ -5,4 +5,6 @@ const urls = {
     }
 }
 
+export const ROOT = 'https://api.test.strackit.com';
+
 export default urls;
